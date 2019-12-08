@@ -1,0 +1,64 @@
+.index-banner {
+    width: 100%;
+    height: 550px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+.index-bannerCard{
+    margin: auto;
+    background-color: rgba(94, 86, 94, 0.8);
+    color: #eee;
+    border-radius: 10px;
+    box-shadow: hotpink;
+    text-align: center;
+    font-size: 2em;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+    padding: 20px 50px;
+}
+.index-bannerCardTitle{
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.index-studentBlock, .index-teacherBlock{
+    min-height: 400px;
+    background: #f1f1f1;
+}
+
+.show-on-scroll{
+    opacity: 0;
+    transition: opacity 1.0s linear;
+    -webkit-transition: opacity 1.0s linear;
+    -moz-transition: opacity 1.0s linear;
+      -o-transition: opacity 1.0s linear;
+}
+
+.show-on-scroll.is-visible {
+    opacity: 1;
+}
+
+.index-blockTitle{
+    font-weight: 700;
+    text-align: center;
+    color: #333;
+}
+
+
+.index-blockDescription{
+    font-weight: 300;
+    color: #4c4a37;
+}
+
+/* footer */
+.bg-dark{
+    background-color: #1c2331;
+    color: #aaa;
+} 
+.bg-dark a{
+    color: #aaa;
+}
+.bg-dark a:hover{
+    color: #fff;
+}

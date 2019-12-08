@@ -1,0 +1,9 @@
+ .buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 300px;
+}
+.btn {
+  width: 0;
+}

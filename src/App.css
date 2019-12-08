@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: roboto;
 }
 
 .App-logo {
@@ -19,4 +20,12 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.red {
+  color: red;
+}
+
+.blue{
+  color: blue;
 }
