@@ -6,27 +6,25 @@ import Form from 'react-bootstrap/Form'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Select from 'react-select';
+import DatePicker from "react-datepicker";
 
 import {
     Link
 } from "react-router-dom";
 
-const options = [
-    { value: 'Hello word C++', label: 'Hello word C++' },
-    { value: 'Nodejs for begin', label: 'Nodejs for begin' },
-    { value: 'Sóng', label: 'Sóng' },
-];
 
 function handleChange(e) {
     console.log(e);
 }
 
 export default function LessonSelectModal(props) {
-    console.log(props)
+
+    const [start_at, setStart] = React.useState(null);
+    const [end_at, setEnd] = React.useState(null);
 
     return (
         <Modal show={props.show} onHide={props.handleClose}>
-            <Form>
+            <Form onSubmit={props.handleSubmit}>
                 <Modal.Header closeButton>
                     <Modal.Title>Bài học đã có</Modal.Title>
                 </Modal.Header>
@@ -36,17 +34,45 @@ export default function LessonSelectModal(props) {
                         <Select
                             className=""
                             onChange={handleChange}
-                            options={options}
+                            options={props.options || []}
+                            required
+                            name="id"
                         />
 
                     <Form.Row className="mt-3">
-                        <Form.Group as={Col} controlId="name">
-                            <Form.Label>Ngày bắt đầu</Form.Label>
-                            <Form.Control type="datetime-local" placeholder="Tên khóa học" />
+                        <Form.Group as={Col} controlId="name" md={12}>
+                            <Form.Label
+                                className="d-block"
+                            >
+                                Thời gian bắt đầu
+                            </Form.Label>
+                            <DatePicker
+                                className="form-control"
+                                showTimeSelect={true}
+                                dateFormat="yyyy-MM-dd HH:mm:ss"
+                                selected={start_at}
+                                onChange={setStart}
+                                name="start_at"
+                                minDate={new Date()}
+                                required
+                            />
                         </Form.Group>
-                        <Form.Group as={Col} controlId="image">
-                            <Form.Label>Ngày Kết thúc</Form.Label>
-                            <Form.Control type="datetime-local" />
+                        <Form.Group as={Col} controlId="image" md={12}>
+                            <Form.Label
+                                className="d-block"
+                            >
+                                Thời gian kết thúc
+                            </Form.Label>
+                            <DatePicker
+                                className="form-control"
+                                showTimeSelect={true}
+                                dateFormat="yyyy-MM-dd HH:mm:ss"
+                                selected={end_at}
+                                onChange={setEnd}
+                                name="end_at"
+                                minDate={new Date()}
+                                required
+                            />
                         </Form.Group>
                     </Form.Row>
                 </Modal.Body>
@@ -54,7 +80,7 @@ export default function LessonSelectModal(props) {
                     <Button variant="secondary" onClick={props.handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={props.handleClose}>
+                    <Button variant="primary" onClick={props.handleClose} type="submit">
                         Save Changes
                     </Button>
                 </Modal.Footer>

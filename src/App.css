@@ -26,6 +26,24 @@
   color: red;
 }
 
+.green {
+  color: green;
+}
+
 .blue{
   color: blue;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+a { 
+}
+
+a.nostyle-link{
+  color: inherit !important;
+}
+a.nostyle-link:hover{
+  text-decoration: none;
 }

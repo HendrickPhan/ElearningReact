@@ -21,10 +21,14 @@ import LessonSelectModal from '../../../../../Components/LessonSelectModal';
 
 
 export default function CreateCourseStep2(props) {
-
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    // stepProps.handleSubmit = (e) => this.handleSubmitStep2(e);
+    // stepProps.lessonSelectList = this.state.lessonSelectList;
+    // stepProps.lessonSelected = this.state.lessonSelected;
+    // stepProps.handleSubmitNewLesson = (e) => this.handleSubmitNewLesson(e);
 
 
     return (
@@ -37,7 +41,7 @@ export default function CreateCourseStep2(props) {
             <h2 className="mt-3 text-center">Tạo Khóa học</h2>
             <Card className="p-3">
                 <Card.Body>
-                    <Form onSubmit={props.handleSubmit}>
+                    <Form onSubmit={props.stepProps.handleSubmit}>
                         <h3 className="mb-3">Bài học</h3>
                         <Row>
                             <Col md={6}>
@@ -55,7 +59,7 @@ export default function CreateCourseStep2(props) {
                                     className="createCourse-createLessonBtn" 
                                     variant="success"
                                     type="button"
-                                    onClick={props.handleNewLessonBtnClick}
+                                    onClick={props.stepProps.handleNewLessonBtnClick}
                                 >
                                     Thêm bài học mới
                                 </Button>
@@ -74,40 +78,32 @@ export default function CreateCourseStep2(props) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Ma trận vô hướng</td>
-                                    <td>2019-12-11</td>
-                                    <td>2019-12-30</td>
-                                    <td>
-                                        <FontAwesome
-                                            name="edit"
-                                            className="mx-2 blue action-icon"
-                                        /> 
-                                        <FontAwesome
-                                            name="trash"
-                                            className="mx-2 red action-icon"
-                                        />
+                                {props.stepProps.lessonSelectedList.map((v, i) => {
+                                    let lesson = props.stepProps.lessonSelectList.find( ({ value }) => {
+                                        return parseInt(value) === parseInt(v.id) 
+                                    });
+                                    return(
+                                        <tr>
+                                            <td>{i + 1}</td>
+                                            <td>{
+                                                lesson.label
+                                            }</td>
+                                            <td>{v.start_at}</td>
+                                            <td>{v.end_at}</td>
+                                            <td>
+                                                <FontAwesome
+                                                    name="edit"
+                                                    className="mx-2 blue action-icon"
+                                                /> 
+                                                <FontAwesome
+                                                    name="trash"
+                                                    className="mx-2 red action-icon"
+                                                />
 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Tích hai ma trận</td>
-                                    <td>2019-12-11</td>
-                                    <td>2019-12-30</td>
-                                    <td>
-                                        <FontAwesome
-                                            name="edit"
-                                            className="mx-2 blue action-icon"
-                                        /> 
-                                        <FontAwesome
-                                            name="trash"
-                                            className="mx-2 red action-icon"
-                                        />
-
-                                    </td>
-                                </tr>
+                                            </td>
+                                        </tr>
+                                    )
+                                })}
                                 
                             </tbody>
                         </Table>
@@ -121,6 +117,8 @@ export default function CreateCourseStep2(props) {
 
             <LessonSelectModal
                 show={show}
+                options={props.stepProps.lessonSelectList}
+                handleSubmit={(e) => props.stepProps.handleLessonSelectSubmit(e)}
                 handleClose={() => handleClose()}
             />
         </Teacher>

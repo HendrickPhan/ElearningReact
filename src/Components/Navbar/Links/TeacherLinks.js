@@ -6,7 +6,7 @@ const TeacherLinks = [
         dropDown: true,
         childrens: [
             {
-                href: "/courses/add",
+                href: "/course/create",
                 name: "Thêm khóa học",
             },
             {

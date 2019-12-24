@@ -3,6 +3,11 @@
     width: fit-content!important;
 }
 
+.btn-inline-block {
+    display: inline-block!important;
+    width: fit-content!important;
+}
+
 .btn {
     flex: 1 1 auto;
     margin: 10px;

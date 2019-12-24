@@ -15,13 +15,12 @@ export default initialState => {
   store.subscribe(() => {
     const state = store.getState();
     const persist = {
-      // cart: state.cart,
+      login: state.login,
       // total: state.total
     };
 
     window.localStorage.setItem('state', JSON.stringify(persist));
   });
-
   return store;
 };
 

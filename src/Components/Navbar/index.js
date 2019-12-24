@@ -36,10 +36,9 @@ export default function NavBarContainer(props) {
                                 <NavDropdown key={index} title={link.name} id="basic-nav-dropdown">
                                     {link.childrens.map((children, cIndex) => {
                                         return (
-                                            <React.Fragment>
+                                            <React.Fragment key={cIndex}>
                                                 <NavDropdown.Item 
-                                                    key={cIndex}
-                                                    href={children.link}
+                                                    href={children.href}
                                                 >
                                                     {children.name}
                                                 </NavDropdown.Item>

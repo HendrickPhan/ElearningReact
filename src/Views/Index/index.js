@@ -21,7 +21,7 @@ import {
 import * as utils from '../../Utility/ShowOnScroll'
 import '../../Utility/ButtonStyle.css';
 
-export default function IndexPage() {
+export default function IndexPage(props) {
     let bannerStyle = {
         background: ` url(${BannerBackground})`
     }
@@ -40,7 +40,7 @@ export default function IndexPage() {
 
     return (
         <React.Fragment>
-            <NavBar/>
+            <NavBar loggedIn={props.loggedIn}/>
             <Row className="index-banner" style={bannerStyle}>
                 <Card className="index-bannerCard show-on-scroll">
                     <Card.Title className="index-bannerCardTitle">AiWan-Learning</Card.Title>

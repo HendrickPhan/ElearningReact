@@ -21,7 +21,6 @@ import CreateLessonForm from '../../../../../Components/CreateLessonForm';
 
 
 export default function CreateCourseStepCreateLesson(props) {
-
     return (
         <Teacher>
             <h2 className="mt-3 text-center">Tạo Bài Học</h2>
@@ -34,6 +33,15 @@ export default function CreateCourseStepCreateLesson(props) {
             </Alert> */}
                     <CreateLessonForm 
                         handleBackBtnClick={(e) => props.handleBackBtnClick(e)}
+                        handleNewQuizBtnClick={(e) => props.stepProps.handleNewQuizBtnClick(e)}
+                        handleNewEssayBtnClick={(e) => props.stepProps.handleNewEssayBtnClick(e)}
+                        handleDeleteQuizQuestionBtnClick = {(e) => props.stepProps.handleDeleteQuizQuestionBtnClick(e)}
+                        handleDeleteQuizAnswerBtnClick = {(e) => props.stepProps.handleDeleteQuizAnswerBtnClick(e)}
+                        handleSubmit={(e) => props.stepProps.handleSubmit(e)}
+                        quizSelectList={props.stepProps.quizSelectList}
+                        essaySelectList={props.stepProps.essaySelectList}
+                        quiz_id={props.stepProps.quiz_id}
+
                     />
                 </Card.Body>
             </Card>

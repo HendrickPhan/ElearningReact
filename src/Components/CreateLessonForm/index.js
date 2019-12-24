@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Select from 'react-select';
+import DatePicker from "react-datepicker";
 
 import {
     Link
@@ -15,38 +16,45 @@ import {
 function handleChange(e) {
     console.log(e);
 }
-const optionsQuiz = [
-    { value: 'Trắc nghiệm Hello word C++', label: 'Trắc nghiệm  Hello word C++' },
-    { value: 'Trắc nghiệm Nodejs for begin', label: 'Trắc nghiệm  Nodejs for begin' },
-    { value: 'Trắc nghiệm Sóng', label: 'Trắc nghiệm Sóng' },
-];
-
-const optionsEssay = [
-    { value: 'Bài tập Hello word C++', label: 'Bài tập Hello word C++' },
-    { value: 'Bài tập Nodejs for begin', label: 'Bài tập Nodejs for begin' },
-    { value: 'Bài tập Sóng', label: 'Bài tập Sóng' },
-];
 
 
 export default function CreateLessonForm(props) {
-    return (
-        <Form>
+    const [start_at, setStart] = React.useState(null);
+    const [end_at, setEnd] = React.useState(null);
+    console.log(props);
 
+    return (
+        <Form onSubmit={props.handleSubmit}>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Tên bài học</Form.Label>
-                <Form.Control placeholder="Tên bài học" />
+                <Form.Control
+                    placeholder="Tên bài học"
+                    name="name"
+                    required
+                />
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Mô tả</Form.Label>
-                <Form.Control as="textarea" placeholder="Mô tả" />
+                <Form.Control
+                    as="textarea"
+                    placeholder="Mô tả"
+                    name="description"
+                    required
+                />
             </Form.Group>
 
 
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Video bài giảng</Form.Label>
-                <Form.Control placeholder="https://youtube.com/assc" />
-                <Form.Text className="text-muted">
+                <Form.Control 
+                    name="video"
+                    placeholder="https://youtube.com/assc" 
+                />
+                <Form.Text
+                    className="text-muted"
+                    required
+                >
                     Sẽ hỗ trợ upload video sau
                 </Form.Text>
             </Form.Group>
@@ -55,15 +63,16 @@ export default function CreateLessonForm(props) {
                 <Col>
                     <Form.Label>Bài tập trắc nghiệm</Form.Label>
                     <Select
-                        className=""
-                        onChange={handleChange}
-                        options={optionsQuiz}
+                        options={props.quizSelectList}
+                        name="quiz_id"
+                        defaultValue={props.quiz_id}
+                        required
                     />
-                    <Button 
+                    <Button
                         className="btn-block btn-3"
                         variant="primary"
                         type="button"
-                        onClick={props.handleNewLessonBtnClick}
+                        onClick={props.handleNewQuizBtnClick}
                     >
                         Thêm bài tập mới
                     </Button>
@@ -73,13 +82,15 @@ export default function CreateLessonForm(props) {
                     <Select
                         className=""
                         onChange={handleChange}
-                        options={optionsEssay}
+                        options={props.essaySelectList}
+                        name="essay_id"
+                        required
                     />
-                    <Button 
+                    <Button
                         className="btn-block btn-3"
                         variant="primary"
                         type="button"
-                        onClick={props.handleNewLessonBtnClick}
+                        onClick={props.handleNewEssayBtnClick}
                     >
                         Thêm bài tập mới
                     </Button>
@@ -87,29 +98,56 @@ export default function CreateLessonForm(props) {
             </Row>
 
 
-            <Form.Row className="mt-3">
-                <Form.Group as={Col} controlId="subject" className="pr-3">
-                    <Form.Label>Ngày bắt đầu</Form.Label>
-                    <Form.Control type="date" min={new Date().toISOString().split("T")[0]}/>
+            <Row className="mt-3">
+                <Form.Group as={Col} controlId="name" 
+                >
+                    <Form.Label
+                        className="d-block"
+                    >
+                        Thời gian bắt đầu
+                            </Form.Label>
+                    <DatePicker
+                        className="form-control"
+                        showTimeSelect={true}
+                        dateFormat="yyyy-MM-dd HH:mm:ss"
+                        selected={start_at}
+                        onChange={setStart}
+                        name="start_at"
+                        minDate={new Date()}
+                        required
+                    />
                     <Form.Text className="text-muted">
                         Học viên sẽ thấy được bài này vào ngày bắt đầu
                     </Form.Text>
                 </Form.Group>
-                <Form.Group as={Col} controlId="grade" className="pl-3">
-                    <Form.Label>Ngày kết thúc</Form.Label>
-                    <Form.Control type="date" min={new Date().toISOString().split("T")[0]}/>
+                <Form.Group as={Col} controlId="image">
+                    <Form.Label
+                        className="d-block"
+                    >
+                        Thời gian kết thúc
+                            </Form.Label>
+                    <DatePicker
+                        className="form-control"
+                        showTimeSelect={true}
+                        dateFormat="yyyy-MM-dd HH:mm:ss"
+                        selected={end_at}
+                        onChange={setEnd}
+                        name="end_at"
+                        minDate={new Date()}
+                        required
+                    />
                     <Form.Text className="text-muted">
                         Học viên sẽ không còn thấy được bài này vào ngày kết thúc
                     </Form.Text>
                 </Form.Group>
-            </Form.Row>
+            </Row>
 
             <Button className="btn btn-1 btn-block float-left" type="button" onClick={props.handleBackBtnClick}>
                 Quay lại
                 </Button>
-            <Link to="/register" className="btn btn-2 btn-block float-right">
+            <Button className="btn btn-2 btn-block float-right" type="submit">
                 Tạo
-                </Link>
+            </Button>
         </Form>
     )
 }
