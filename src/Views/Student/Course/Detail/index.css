@@ -1,0 +1,24 @@
+.course-banner {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.teacher-avatar{
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+}
+.descriptionCell{
+    max-width: 250px;
+}
+.enroll-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-weight: 700;
+    color: #333;
+}
+.course-content-container .row{
+    margin: 0px;
+}
